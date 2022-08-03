@@ -6,10 +6,9 @@ const router = express.Router();
 
 router.get('/',mainController.homePage);
 router.post('/',mainController.endGame);
-router.post('/start_game',mainController.startGame);
-router.post('/continue',gameController.continueGame);
+router.get('/start_game',mainController.homePage);
 router.post('/enter_word',gameController.sendLetter);
-
-
+router.post('/continue',gameController.continueGame);
+router.post('/start_game',mainController.startGame);
 
 export default router;

@@ -13,5 +13,8 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
 app.use('/',mainRouter);
+app.get('/*',(req,res) => {
+    return res.status(404).sendFile(path.resolve("./public/error.html"))
+})
 
 app.listen(process.env.PORT || 3000);
