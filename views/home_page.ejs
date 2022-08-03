@@ -1,0 +1,19 @@
+<img src="" alt=""> 
+<% let scoreArr = scores.map((scoreObj) => {return scoreObj.score}) %>
+<% scoreArr.sort((a,b) => {return b - a}) %>
+<form action="/start_game" method="post">
+    <div class="container">
+        <div class="highscores">
+            <h1>Highscores </h1>
+             <div class="table">  
+            <% for(let i = 0; i < scoreArr.length && i <= 10; i++ ) { %>
+                <div><%= scoreArr[i] %></div>
+            <% } %>
+            </div> 
+        </div>
+        
+        <input type="hidden" name="score">
+        <input type="hidden" value="" name="word_id">
+        <input type="submit" class="new-game__input" value="new game">
+    </div>
+</form>

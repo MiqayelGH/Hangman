@@ -1,0 +1,60 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  
+}
+body {
+  background: linear-gradient(to bottom,white,rgb(40, 129, 245));
+  height: 700px;
+}
+.word-type {
+  margin: 10px;
+}
+.word-hint {
+  margin: 10px;
+}
+form {
+  padding: 0 10px; 
+}
+.game__input { 
+  height: 20px;
+  display: flex;
+  margin: 10px auto;
+}
+.guessed-word {
+  background-color: white !important;
+  color: black !important;
+}
+.container {
+  padding: 10px;
+  border: 1px rgb(40, 129, 245) solid;
+
+  margin: 50px auto;
+  width: 60%;
+  height: 460px;
+  background-color: rgb(205, 225, 252);
+}
+.word-letter {
+  width: 10%;
+  height: auto;
+  margin: 0 auto;
+}
+.random-word {
+  display: flex;
+  justify-content: space-evenly;
+}
+.random-word div {
+  width: 30px;
+  height: 30px;
+  line-height: 15px;
+  text-align: center;
+  border: 2px solid black;
+  padding: 5px;
+  background-color: grey;
+}
+.entered-letters {
+  display: flex;
+}
+.entered-letters div {
+  margin-left: 2px;
+}
