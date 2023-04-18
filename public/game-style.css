@@ -5,7 +5,6 @@
 }
 body {
   background: linear-gradient(to bottom,white,rgb(40, 129, 245));
-  height: 700px;
 }
 .word-type {
   margin: 10px;
@@ -57,4 +56,54 @@ form {
 }
 .entered-letters div {
   margin-left: 2px;
+}
+
+.hangmanDiv {
+  text-align: center;
+}
+
+.figure-svg {
+  padding-left: 7%;
+  height: 250px;
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 4px;
+  stroke-linecap: round;
+}
+
+.svg-visible {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 4px;
+  stroke-linecap: round;
+}
+
+.statusDiv {
+  text-align: center;
+  margin: 2% 0;
+}
+
+.input-box {
+  margin: auto;
+  display: block;
+  margin-bottom: 1%;
+  width: 35%;
+}
+
+.word-reveal {
+  -webkit-animation: fadein 8s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 8s; /* Firefox < 16 */
+  -ms-animation: fadein 8s; /* Internet Explorer */
+  -o-animation: fadein 8s; /* Opera < 12.1 */
+  animation: fadein 8s;
+}
+
+.keyForm {
+  padding: 0;
+  margin-bottom: 1%;
+}
+
+.keybtn {
+  height: 50px;
+  width: 50px;
 }

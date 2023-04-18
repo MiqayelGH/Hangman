@@ -3,33 +3,55 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+@font-face {
+    font-family: good-game;
+    src: url('./good-game.ttf');
+}
+
+/* .head__main {
+    font-family: good-game;
+}
+
+.head__descr{
+    font-family: good-game;
+}
+
 h1 {
-    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-family: good-game;
 }
-body{
-    background: linear-gradient(to right,white,rgb(51, 157, 255));
+
+body {
+    background: rgb(61 79 173);
 }
+
 .container {
-    width: 60%;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(208, 241, 253);
-    border: 2px solid rgb(51, 157, 255);
-    border-radius: 5px;
-    box-shadow: rgb(228, 228, 255) 2px 5px 5px 4px;
+    background-image: url('./hangman.png');
 }
-.table {
-    background-color: white;
-    border: 1px solid rgb(51, 157, 255);
-  }
-.new-game__input {
-    margin: 5px;
-    width: 120px;
-    height: 60px;
-    border: 2px solid rgb(51, 157, 255);
+
+.table { 
+    width: auto;
+    font-family: good-game;
     border-radius: 10px;
-  
+    padding: 20px 16px;
+    background-color: white;
+     height: 150px; 
+    background-color: rgba(61, 80, 173, 0.665);
 }
+
+/* .new-game__input {
+    border: 1px solid rgb(0, 0, 0);;
+    background-color: rgba(61, 80, 173, 0);
+    font-family: good-game;
+    font-size: 20px;
+    margin-top: 25px;
+    width: 240px;
+    height: 30px;
+    border-radius: 30px;
+    cursor: pointer;
+} */
+/* 
+.new-game__input:hover  {
+    background-color: rgb(61, 80, 173);
+} */
