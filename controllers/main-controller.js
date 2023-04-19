@@ -10,15 +10,13 @@ async function homePage(req, res) {
   });
 }
 async function sendLetter(req, res) {
-  const body = req.body;
-
-  function renderGame (wordData, mistakes, progress, score, enteredLetters, guessedWordsIds) {
+  function renderGame (wordData, mistakes, progress, score, enteredLetters, guessedWordsIds, enteredRight) {
     let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
-
+    console.log(wordData, mistakes, progress, score, enteredLetters, guessedWordsIds, enteredRight , 'poxancvox tvyalner')
     return res.render("game.ejs", {
       layout: "./layouts/game-layout.ejs",
       alphabet: alphabet,
-      word: wordData.word,
+      wordLength: wordData.word.length,
       type: wordData.type,
       description: wordData.description,
       wordId: wordData.id,
@@ -27,15 +25,25 @@ async function sendLetter(req, res) {
       score: score,
       enteredLetters: enteredLetters,
       guessedWordsIds: guessedWordsIds,
+      enteredRight: enteredRight || []
     })
   }
 
-  const guessedWordsIds = body.guessedWordsIds;
+  const body = req.body;
+  console.log(req.body)
 
+
+  const guessedWordsIds = body.guessedWordsIds;
   if  (typeof body.stage !== 'undefined') {
     if  (body.stage === 'new') {
-      const currentWordData = await Word.getWord([]);
-      return renderGame(currentWordData, 0, true, 0, [] , "");
+      const wordData = await Word.getWord([]);
+
+      const enteredRight = [];
+      for (let i = 0; i < wordData.word.length ; ++i) {
+        enteredRight.push('_')
+      }
+
+      return renderGame(wordData, 0, true, 0, [] , "", enteredRight);
 
     } else if (body.stage === 'continue') {
       let guessedWordsIds = [];
@@ -47,9 +55,14 @@ async function sendLetter(req, res) {
       }
 
       guessedWordsIds.push(body.wordId) 
-      const newWordData = await Word.getWord(guessedWordsIds)
+      const newWord = await Word.getWord(guessedWordsIds)
+      const enteredRight = [];
+      
+      for (let i = 0; i < newWord.word.length ; ++i) {
+        enteredRight.push('_')
+      }
 
-      return renderGame (newWordData, 0, true, body.score, [], guessedWordsIds)
+      return renderGame (newWord, 0, true, body.score, [], guessedWordsIds, enteredRight)
     } else if (body.stage === 'end') {
       const score = body.score; 
       const guessedWords = await Word.getGuessedWordsById(guessedWordsIds);
@@ -77,6 +90,9 @@ async function sendLetter(req, res) {
   }
   enteredLetters.push(letter)
 
+  const enteredRight = await Word.getFoundedPart(wordData.word, enteredLetters)
+  console.log(enteredRight)
+
   const checkLttr = await Word.checkLetter(letter, currentWord)
   
   if (!checkLttr) {
@@ -84,18 +100,21 @@ async function sendLetter(req, res) {
 
     if (mistakes >= 7) {
         await Score.addScore(score)
-        return renderGame (wordData, mistakes, false, score, enteredLetters, guessedWordsIds)
+        return renderGame (wordData, mistakes, false, score, enteredLetters, guessedWordsIds, enteredRight)
     } 
   } else {
         score += 10;
   }
 
+  console.log(enteredLetters, wordData.word)
   if (await Word.checkWord (wordData.word, enteredLetters)) {
     score += currentWord.length / 2 * 100
-    return renderGame (wordData, mistakes, false, score, enteredLetters, guessedWordsIds)
+    return renderGame (wordData, mistakes, false, score, enteredLetters, guessedWordsIds, enteredRight)
   }
 
-  renderGame (wordData, mistakes, true, score, enteredLetters, guessedWordsIds)
+  
+  // console.log(enteredLetters)
+  renderGame (wordData, mistakes, true, score, enteredLetters, guessedWordsIds, enteredRight)
 }
 
 export default {
