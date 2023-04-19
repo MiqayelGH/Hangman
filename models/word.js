@@ -8,11 +8,24 @@ class Word extends Model {
     this.description = description;
   }
 
-static async checkLetter(letter, word) {
-    const filteredWord = word.split("");
-    const includes = filteredWord.includes(letter)
-    return includes;
- }
+  static async getFoundedPart(word, chars) {
+    var result = [];
+    for (let i = 0; i < word.length; i++) {
+      if (chars.includes(word[i])) {
+        result.push(word[i]);
+      } else {
+        result.push('_');
+      }
+    }
+    return result;
+  }
+  
+
+  static async checkLetter(letter, word) {
+      const filteredWord = word.split("");
+      const includes = filteredWord.includes(letter)
+      return includes;
+  }
 
  static async checkWord(word, enteredLetters) {
     const wordData = Array.from(new Set(word.split('')));
