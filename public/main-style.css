@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,13 +9,10 @@
     src: url('./good-game.ttf');
 }
 
-/* .head__main {
+.head__main {
     font-family: good-game;
 }
 
-.head__descr{
-    font-family: good-game;
-}
 
 h1 {
     text-align: center;
@@ -23,22 +20,23 @@ h1 {
 }
 
 body {
-    background: rgb(61 79 173);
+    background: rgb(61 79 173) !important;
 }
 
 .container {
     background-image: url('./hangman.png');
 }
 
-.table { 
-    width: auto;
+ .scores { 
+    width: 290px;
     font-family: good-game;
+    font-size: 22px;
     border-radius: 10px;
-    padding: 20px 16px;
-    background-color: white;
-     height: 150px; 
+    padding: 16px 20px 0 20px;
+    height: 390px; 
+    margin: 0 auto;
     background-color: rgba(61, 80, 173, 0.665);
-}
+} 
 
 /* .new-game__input {
     border: 1px solid rgb(0, 0, 0);;
