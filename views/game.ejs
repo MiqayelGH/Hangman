@@ -22,14 +22,25 @@
       </div>
 
     <% if (!progress && mistakes >= 7) { %>
-        <div>
-            <h1>GAME OVER</h1>
+        <div class="lose_div">
+            <h1 class="lose_txt">GAME OVER</h1>
         </div>
-    <% } else if (!progress) { %>
-        <h1>YOU WIN</h1>
         <form align="center" action="/" method="post">
             <button 
-                class="keybtn btn btn-outline-dark btn-lg" 
+                class="main-menu_btn"
+                name="stage"
+                value="end"> Return To Main Menu
+            </button>
+            <input type="hidden" name="wordId" value="<%= wordId %>">
+            <input type="hidden" name="score" value="<%= score %>">
+            <input type="hidden" name="guessedWordsIds" value="<%= guessedWordsIds %>">
+        </form>  
+    <% } else if (!progress) { %>
+        <h1 class="win_txt">YOU WIN</h1>
+        <div class="win_div">
+        <form action="/" method="post">
+            <button 
+                class="continue_btn"
                 name="stage"
                 value="continue"> Continue
             </button>
@@ -37,50 +48,41 @@
             <input type="hidden" name="score" value="<%= score %>">
             <input type="hidden" name="guessedWordsIds" value="<%= guessedWordsIds %>">
         </form>
-        <button>
-            <form align="center" action="/" method="post">
-                <button 
-                    class="keybtn btn btn-outline-dark btn-lg" 
-                    name="stage"
-                    value="end"> Main Menu
-                </button>
-                <input type="hidden" name="wordId" value="<%= wordId %>">
-                <input type="hidden" name="score" value="<%= score %>">
-                <input type="hidden" name="guessedWordsIds" value="<%= guessedWordsIds %>">
-            </form>   
-        </button>
-    <% } else { %>      
-        <div>    
-        <div class="row justify-content-center">
-            <div align="center">
-
+        <form action="/" method="post">
+            <button 
+                class="main-menu_btn"
+                name="stage"
+                value="end"> Return To Main Menu
+            </button>
+            <input type="hidden" name="wordId" value="<%= wordId %>">
+            <input type="hidden" name="score" value="<%= score %>">
+            <input type="hidden" name="guessedWordsIds" value="<%= guessedWordsIds %>">
+        </form>  
+    </div> 
+    <% } else { %>         
+        <div>
+            <div class="word">
                 <% for (let i = 0; i < wordLength; i++) { %>
 
                         <% if (enteredRight[i] !== '_') { %>          
-                            <div> <%= enteredRight[i] %> </div>
+                            <div class="opened-letter"> <%= enteredRight[i] %> </div>
                         <% } else { %>
-                            <div class="box"></div>
+                            <div class="closed-letter"></div>
                         <% } %>
-
                 <% } %>
-
             </div>
         </div>
         <div class="word-hint">Hint: <%= description %> </div>
-        <div>
+        <div class="alphabet">
         <% for (var i = 0; i < alphabet.length; i++) { %>
             <% if (enteredLetters.includes(alphabet[i])) { %>
-                <form align="center">
-                    <button disabled><%= alphabet[i] %></button>
-                </form>
+                    <button class="letter" disabled><%= alphabet[i] %></button>
             <% } else if (!progress) {%>
-                <form align="center">
-                    <button disabled><%= alphabet[i] %></button>
-                </form>
-
+                    <button class="letter" disabled><%= alphabet[i] %></button>
             <% } else { %>
-                <form align="center" action="/" method="post">
+                <form action="/" method="post">
                     <button 
+                        class="letter"
                         name="letter" 
                         value=<%= alphabet[i] %>><%= alphabet[i] %>
                     </button>

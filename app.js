@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("views"));
-app.set("layout", "./layouts/main-layout.ejs");
+app.set("layout", "./layouts/game-layout.ejs");
 app.use(expressLayouts);
 app.use(express.static(path.resolve("public")));
 app.use(express.urlencoded({ extended: true }));

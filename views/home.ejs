@@ -1,20 +1,17 @@
-
 <% let scoreArr = scores.map((scoreObj) => {return scoreObj.score}) %>
 <% scoreArr.sort((a,b) => {return b - a}) %>
-<h1 class="head__main display-2">HANGMAN</h1>
-<div class="d-flex justify-content-evenly gap-5">
-    <div>
-        <h1>Highscores</h1>
-            <div class="scores d-flex flex-column flex-wrap">  
-        <% for (let i = 0; i < scoreArr.length && i < 30; i++ ) { %>
-            <div class="s"><%=i + 1%>.<%= scoreArr[i] %></div>
-        <% } %>
+<div>  
+    <div class="hscores">
+        <div>
+            <h1 class="hscores__header">Highscores</h1>
+            <div class="hscores__body">  
+
+            <% for (let i = 0; i < scoreArr.length && i < 30; i++ ) { %>
+                <div class="hscores__elem"><%=i + 1%>.<%= scoreArr[i] %></div>
+            <% } %>
+            </div> 
         </div> 
-    </div>
-    <div class="align-self-end">      
         <form action="/" method="post">          
-            <button type="submit"  name="stage" value="new" class="btn btn-outline-dark btn-lg btn-block" style="font-family: good-game;">New Game</button>
-        </form>
-    </div>
-</div>
+        <button type="submit" name="stage" value="new" class="new-game__btn">New Game</button>
+    </form>
 </div>
