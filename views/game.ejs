@@ -1,69 +1,99 @@
+
 <% let trueVal = [] %>
-<div class="container">
-    <div class="word-type">Type: <%= type %> </div>
- 
+    <div class="word-type score">
+        <h3>
+            Type: <%= type %> 
+        </h3>
+        <h3>Score:<%= score %>  </h3>
+    </div>
+    <div class="hangmanDiv">
+        <svg class="figure-svg">
+          <line class="<% if (mistakes >= 1)  {%>svg-visible<%}%>" x1="20" y1="230" x2="100" y2="230" />
+          <line class="<% if (mistakes >= 2)  {%>svg-visible<%}%>" x1="60" y1="20" x2="60" y2="225" />
+          <line class="<% if (mistakes >= 3)  {%>svg-visible<%}%>" x1="60" y1="15" x2="140" y2="15" />
+          <line class="<% if (mistakes >= 4)  {%>svg-visible<%}%>" x1="140" y1="20" x2="140" y2="45" />
+          <circle class="<% if (mistakes >= 4)  {%>svg-visible<%}%>" cx="140" cy="70" r="20" class="figure-part" />
+          <line class="<% if (mistakes >= 5)  {%>svg-visible<%}%>" x1="140" y1="95" x2="140" y2="150" class="figure-part" />
+          <line class="<% if (mistakes >= 6)  {%>svg-visible<%}%>" x1="136" y1="120" x2="120" y2="100" class="figure-part" />
+          <line class="<% if (mistakes >= 6)  {%>svg-visible<%}%>" x1="144" y1="120" x2="160" y2="100" class="figure-part" />
+          <line class="<% if (mistakes >= 7)  {%>svg-visible<%}%>" x1="138" y1="152" x2="120" y2="180" class="figure-part" />
+          <line class="<% if (mistakes >= 7)  {%>svg-visible<%}%>" x1="142" y1="152" x2="160" y2="180" class="figure-part" />
+        </svg>
+      </div>
 
-    <div class="random-word"> 
-        <% let values = Object.values(enteredLetters) %>
-            <% if (values[0]) { 
-                    for(let key in values[0]) {  
-                    trueVal.push(key)}
-            } %>
- 
-  
-          <% for(let i = 0; i < word.length; i++) { %>
-             <% if(trueVal.includes(word[i])) { %>
-                    <div class="guessed-word"> <%= word[i] %> </div>  
-                        
-             <% } else { %>
-                <div> <%= " " %> </div>  
-             <% } %> 
-          <% } %>  
-
+    <% if (!progress && mistakes >= 7) { %>
+        <div class="lose_div">
+            <h1 class="lose_txt">GAME OVER</h1>
+        </div>
+        <form align="center" action="/" method="post">
+            <button 
+                class="main-menu_btn"
+                name="stage"
+                value="end"> Return To Main Menu
+            </button>
+            <input type="hidden" name="wordId" value="<%= wordId %>">
+            <input type="hidden" name="score" value="<%= score %>">
+            <input type="hidden" name="guessedWordsIds" value="<%= guessedWordsIds %>">
+        </form>  
+    <% } else if (!progress) { %>
+        <h1 class="win_txt">YOU WIN</h1>
+        <div class="win_div">
+        <form action="/" method="post">
+            <button 
+                class="continue_btn"
+                name="stage"
+                value="continue"> Continue
+            </button>
+            <input type="hidden" name="wordId" value="<%= wordId %>">
+            <input type="hidden" name="score" value="<%= score %>">
+            <input type="hidden" name="guessedWordsIds" value="<%= guessedWordsIds %>">
+        </form>
+        <form action="/" method="post">
+            <button 
+                class="main-menu_btn"
+                name="stage"
+                value="end"> Return To Main Menu
+            </button>
+            <input type="hidden" name="wordId" value="<%= wordId %>">
+            <input type="hidden" name="score" value="<%= score %>">
+            <input type="hidden" name="guessedWordsIds" value="<%= guessedWordsIds %>">
+        </form>  
     </div> 
-    
-  
-  
-    <form action="/enter_word" method="post"> 
-            <% if (enteredLetters !== 'newPlayer') { %>
-                <% for (let key in values[0]) { %>
-                    <input type="hidden" name="1 <%= key %>" value="<%= key %>">   
+    <% } else { %>         
+        <div>
+            <div class="word">
+                <% for (let i = 0; i < wordLength; i++) { %>
+
+                        <% if (enteredRight[i] !== '_') { %>          
+                            <div class="opened-letter"> <%= enteredRight[i] %> </div>
+                        <% } else { %>
+                            <div class="closed-letter"></div>
+                        <% } %>
                 <% } %>
-
-                <% for (let key in values[1]) { %>
-                    <input type="hidden" name="0 <%= key %>" value="<%= key %>">   
-                <% } %>
-
-            <% } else { %>
-                 <input type="hidden" name="enteredLetters" value="<%= enteredLetters %>"> 
-            <% } %> 
-            
-            <input type="hidden" name="word_id" value="<%= wordId %>">
-            <input type="hidden" name="guessed_words_ids" value="<%= guessed_words_ids %>">
-
-        <div class="word-letter">
-            <div class="game__input">
-                <input type="text" placeholder="Enter a letter" name="letter_input" maxlength="1" autocomplete="off">
-                <input type="submit" value="Enter"> 
             </div>
         </div>
-
-    </form>
-
-    <div class="word-hint">Hint: <%= description %> </div>
-    
-    <% if(enteredLetters !== 'newPlayer') { %>
-        <% if(Object.values(values[1]).length !== 0) { %>
-            <div class="entered-letters">
-                Entered wrong:
-                
-                <%for (let key in values[1]) { %>
-                    <div> <%= key %> </div>
-                <% }%>
-                
-            </div>
-       <% }%>
+        <div class="word-hint">Hint: <%= description %> </div>
+        <div class="alphabet">
+        <% for (var i = 0; i < alphabet.length; i++) { %>
+            <% if (enteredLetters.includes(alphabet[i])) { %>
+                    <button class="letter" disabled><%= alphabet[i] %></button>
+            <% } else if (!progress) {%>
+                    <button class="letter" disabled><%= alphabet[i] %></button>
+            <% } else { %>
+                <form action="/" method="post">
+                    <button 
+                        class="letter"
+                        name="letter" 
+                        value=<%= alphabet[i] %>><%= alphabet[i] %>
+                    </button>
+                    <input type="hidden" name="wordId" value="<%= wordId %>">
+                    <input type="hidden" name="mistakes" value="<%= mistakes %>">
+                    <input type="hidden" name="score" value="<%= score %>">
+                    <input type="hidden" name="enteredLetters" value="<%= enteredLetters %>">
+                    <input type="hidden" name="guessedWordsIds" value="<%= guessedWordsIds %>">
+                </form>
+            <% } %>
+        <% } %>
     <% } %>
-
-
+  </div>
 </div>

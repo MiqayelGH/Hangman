@@ -1,35 +1,82 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: good-game;
 }
-h1 {
-    font-family: Arial, Helvetica, sans-serif;
+
+@font-face {
+    font-family: good-game;
+    src: url('./good-game.ttf');
 }
-body{
-    background: linear-gradient(to right,white,rgb(51, 157, 255));
-}
+
 .container {
-    width: 60%;
-    margin: 20px auto;
+    margin: 120px auto;
+    width: 1360px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    gap: 300px;
+    background-image: url('hangman.png');
+}
+
+.head__main {
+    margin: auto 0;
+    font-size: 100px;
+    letter-spacing: 5px;
+}
+
+body {
+    background: rgb(61 79 173) !important;
+}
+
+.container {
+    background-image: url('./hangman.png');
+}
+
+.hscores {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    background-color: rgb(208, 241, 253);
-    border: 2px solid rgb(51, 157, 255);
-    border-radius: 5px;
-    box-shadow: rgb(228, 228, 255) 2px 5px 5px 4px;
+    gap: 25px;
 }
-.table {
-    background-color: white;
-    border: 1px solid rgb(51, 157, 255);
-  }
-.new-game__input {
-    margin: 5px;
-    width: 120px;
-    height: 60px;
-    border: 2px solid rgb(51, 157, 255);
+
+.hscores__header {
+    margin: 25px;
+    text-align: center;
+    font-size: 40px;
+    letter-spacing: 4px;
+    color: rgba(105, 116, 170, 0.797);
+}
+
+.hscores__body { 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 380px;
+    font-size: 22px;
     border-radius: 10px;
-  
+    padding: 16px 20px 0 20px;
+    height: 390px; 
+    margin: 0 auto;
+    background-color: rgba(61, 80, 173, 0.665);
+} 
+
+.hscores__elem {
+    font-size: 34px;
+    letter-spacing: 2px;
+}
+
+.new-game__btn {
+    border-radius: 8px;
+    border: none;
+    font-size: 28px;
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(61, 80, 173, 0.168);
+    cursor: pointer;
+}
+
+.new-game__btn:hover {
+    background-color:  rgb(45, 25, 88, 0.839);    
 }
