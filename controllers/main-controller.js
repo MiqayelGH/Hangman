@@ -9,6 +9,7 @@ async function homePage(req, res) {
     scores: scores,
   });
 }
+
 async function sendLetter(req, res) {
   function renderGame(
     wordData,

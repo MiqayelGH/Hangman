@@ -4,7 +4,7 @@ import mainRouter from "./routers/main-router.js";
 import expressLayouts from "express-ejs-layouts";
 
 const app = express();
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("views"));
@@ -16,9 +16,11 @@ app.use(express.json());
 
 app.use("/", mainRouter);
 app.use("/*", (req, res) => {
-  return res.status(404).sendFile(path.resolve("./public/error.html"));
+  return res.status(404).render("error.ejs", {
+    layout: "./layouts/main-layout.ejs",
+  });
 });
 
 app.listen(PORT, () => {
-    console.log('listening on port:', PORT)
+  console.log("listening on port:", PORT);
 });
