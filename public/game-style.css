@@ -1,12 +1,12 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;  
+  box-sizing: border-box;
 }
 
 @font-face {
   font-family: good-game;
-  src: url('./good-game.ttf');
+  src: url("./good-game.ttf");
 }
 
 body {
@@ -14,10 +14,11 @@ body {
 }
 
 .container {
-  margin: 20px auto;
-  width: 1160px;
-  height: 902px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100dvh;
   background-image: url(./hangman_the_game.jpg);
+  background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   display: flex;
@@ -27,12 +28,14 @@ body {
 }
 
 .word-type {
+  margin: 0 auto;
   background-color: rgb(61 79 173);
-  padding: 5px 30px 5px 5px;
+  padding: 15px;
   width: fit-content;
+  text-align: center;
   font-size: 24px;
-  border-radius: 0 0px 100px 0;
   font-family: good-game;
+  border-radius: 6px;
   letter-spacing: 3px;
 }
 
@@ -41,7 +44,6 @@ body {
   justify-content: center;
   gap: 32px;
 }
-
 
 .alphabet {
   display: flex;
@@ -61,7 +63,7 @@ body {
   height: 50px;
   border: 2px solid rgb(61 79 173);
   border-radius: 8px;
-  background-color: rgb(249, 245, 245);
+  background-color: rgb(86, 114, 255);
 }
 
 .closed-letter {
@@ -77,6 +79,7 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 20px;
+  background-color: rgb(82, 106, 230);
   font-size: 16px;
   border: none;
 }
@@ -84,13 +87,13 @@ body {
 .letter:disabled {
   width: 50px;
   height: 50px;
-  background-color: white;
+  background-color: rgb(25, 33, 68);
 }
 
-
 .word-hint {
-  color: rgb(219, 219, 221);
+  color: rgb(14, 18, 39);
   font-size: 22px;
+  font-weight: 600;
   text-align: center;
   text-transform: capitalize;
   margin: 10px 0;
@@ -102,27 +105,26 @@ body {
   background-color: rgb(61 79 173);
 }
 
-.win_div{
+.win_div {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 32px;
 }
 
-.win_txt { 
+.win_txt {
   text-align: center;
   font-family: good-game;
   font-size: 50px;
 }
 
-.lose_txt { 
+.lose_txt {
   text-align: center;
   font-family: good-game;
   font-size: 50px;
 }
 
 .main-menu_btn {
-
 }
 
 .continue_btn {
